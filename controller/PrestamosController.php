@@ -21,11 +21,12 @@ class PrestamosController {
                 $this->listPrestamos();
             } elseif ( $op == 'new' ) {
                 $this->savePrestamo();
+            } elseif ( $op == 'update' ) {
+                $this->updatePrestamo();
             } else {
                 $this->showError("Page not found", "Page for operation ".$op." was not found!");
             }
         } catch ( Exception $e ) {
-            // some unknown Exception got through here, use application error page to display it
             $this->showError("Application error", $e->getMessage());
         }
     }
@@ -61,6 +62,30 @@ class PrestamosController {
         }
         
         include 'view/prestamo-form.php';
+    }
+
+    public function updatePrestamo() {
+       
+        $title = 'Entregar Prestamo';
+        $codigo = '';
+        $errors = array();
+
+        if ( isset($_POST['form-entrega-submitted']) ) {
+            $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;          
+            try {
+                $this->prestamosService->updatePrestamo($codigo);
+                //$this->redirect('index.php');
+                return;
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+        }
+        
+        include 'view/entrega-form.php';
+    }
+
+    public function showError($title, $message) {
+        include 'view/error.php';
     }
 }
 ?>

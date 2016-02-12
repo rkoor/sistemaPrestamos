@@ -44,7 +44,7 @@
                 <tr>
                     <td><a href="index.php?op=show&id=<?php print $contact->id; ?>"><?php print htmlentities($prestamo->id_persona); ?></a></td>
                     <td><?php print htmlentities($prestamo->codigo); ?></td>
-                    <td><a href="index.php?op=delete&id=<?php print $prestamo->hora_; ?>">MODIFICAR</a></td>
+                    <td><a href="index.php?op=update&id=<?php print $prestamo->hora_prestamo; ?>">MODIFICAR</a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

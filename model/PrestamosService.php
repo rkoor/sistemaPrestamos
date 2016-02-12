@@ -60,6 +60,18 @@ class PrestamosService {
             throw $e;
         }
     }
+
+    public function updatePrestamo( $codigo ) {
+        try {
+            $this->openDb();
+            $res = $this->prestamosGateway->update($codigo);
+            $this->closeDb();
+            return $res;
+        } catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+    }
     
     
 }
