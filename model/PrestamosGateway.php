@@ -23,7 +23,7 @@ class PrestamosGateway {
         $dbres = mysql_query("SELECT * FROM prestamos WHERE id=$dbId");
         
         return mysql_fetch_object($dbres);
-		
+        
     }
 
     public function insert( $id_persona, $codigo ) {
@@ -45,7 +45,9 @@ class PrestamosGateway {
             WHERE hora_entrega IS NULL;");
         
 
-        
+        if ($valmulta<) {
+            mysql_query("UPDATE prestamos SET multa = 1  WHERE codigo='$dbCodigo'");
+        }
 
        // echo "ENTREGADO";
     }
@@ -53,3 +55,4 @@ class PrestamosGateway {
 }
 
 ?>
+             
