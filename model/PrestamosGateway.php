@@ -36,20 +36,24 @@ class PrestamosGateway {
     
     public function update($codigo) {
         $dbCodigo = mysql_real_escape_string($codigo);
-        $sql = mysql_query("UPDATE prestamos SET hora_entrega = NOW()  WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
+        
 
         //$fecha_prestamo = mysql_query("SELECT hora_prestamo FROM prestamos WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
         
-        $valmulta = mysql_query("SELECT TIMESTAMPDIFF(day, NOW(), hora_prestamo) AS 'valormulta'
+        $valmulta = mysql_query("SELECT TIMESTAMPDIFF(day, hora_prestamo, NOW()) AS 'valormulta'
             FROM prestamos
             WHERE hora_entrega IS NULL;");
-        
+        $resultado = mysql_fetch_array($valmulta);
+        print_r($resultado);
+        $multa = $resultado[0];
+        echo $multa;
 
-        if ($valmulta<) {
-            mysql_query("UPDATE prestamos SET multa = 1  WHERE codigo='$dbCodigo'");
+        if ($multa >= 1) {
+            mysql_query("UPDATE prestamos SET multa = 1  WHERE codigo='$dbCodigo' AND hora_entrega is NULL");
         }
 
-       // echo "ENTREGADO";
+        $sql = mysql_query("UPDATE prestamos SET hora_entrega = NOW()  WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
+
     }
     
 }
