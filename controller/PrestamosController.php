@@ -46,22 +46,22 @@ class PrestamosController {
        
         $errors = array();
         
-        if ( isset($_POST['form-submitted']) ) {
+        if ( isset($_POST['id_persona']) ) {
             
             $id_persona       = isset($_POST['id_persona']) ?   $_POST['id_persona']  :NULL;
             $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;
 
             
             try {
-                $this->prestamosService->createNewPrestamo($id_persona, $codigo);
-                $this->redirect('index.php');
-                return;
+                echo $this->prestamosService->createNewPrestamo($id_persona, $codigo);
+                //$this->redirect('index.php');
+                //return;
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
         }
         
-        include 'view/prestamo-form.php';
+        else include 'view/prestamo-form.php';
     }
 
     public function updatePrestamo() {
@@ -70,18 +70,18 @@ class PrestamosController {
         $codigo = '';
         $errors = array();
 
-        if ( isset($_POST['form-entrega-submitted']) ) {
+        if ( isset($_POST['codigo']) ) {
             $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;          
             try {
-                $this->prestamosService->updatePrestamo($codigo);
+                echo $this->prestamosService->updatePrestamo($codigo);
                 //$this->redirect('index.php');
-                return;
+                //return;
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
         }
         
-        include 'view/entrega-form.php';
+       else include 'view/entrega-form.php';
     }
 
     public function showError($title, $message) {

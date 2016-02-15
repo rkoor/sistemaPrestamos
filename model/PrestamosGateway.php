@@ -20,7 +20,10 @@ class PrestamosGateway {
     public function selectById($id_persona) {
         $dbId = mysql_real_escape_string($id_persona);
         
-        $dbres = mysql_query("SELECT * FROM prestamos WHERE id=$dbId");
+        $dbres = mysql_query("SELECT persona.nombre, persona.id, articulos.codigo 
+                                FROM persona, prestamos, articulos 
+                                WHERE persona.id=$dbId persona.id=prestamos.id_persona 
+                                AND prestamos.codigo=articulos.codigo ");
         
         return mysql_fetch_object($dbres);
         
@@ -29,30 +32,25 @@ class PrestamosGateway {
     public function insert( $id_persona, $codigo ) {
         $dbId_persona = ($id_persona != NULL)?"'".mysql_real_escape_string($id_persona)."'":'NULL';
         $dbCodigo = ($codigo != NULL)?"'".mysql_real_escape_string($codigo)."'":'NULL';
-        mysql_query("INSERT INTO prestamos (id_persona, codigo, hora_prestamo) VALUES ($dbId_persona, $dbCodigo, NOW())");
-        return mysql_insert_id();
+        return mysql_query("INSERT INTO prestamos (id_persona, codigo, hora_prestamo) VALUES ($dbId_persona, $dbCodigo, NOW())");
+        
 
     }
     
     public function update($codigo) {
         $dbCodigo = mysql_real_escape_string($codigo);
-        
-
-        //$fecha_prestamo = mysql_query("SELECT hora_prestamo FROM prestamos WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
-        
         $valmulta = mysql_query("SELECT TIMESTAMPDIFF(day, hora_prestamo, NOW()) AS 'valormulta'
             FROM prestamos
-            WHERE hora_entrega IS NULL;");
+            WHERE hora_entrega IS NULL");
         $resultado = mysql_fetch_array($valmulta);
-        print_r($resultado);
-        $multa = $resultado[0];
-        echo $multa;
 
+        $multa = $resultado[0];
+        print_r($resultado);
         if ($multa >= 1) {
-            mysql_query("UPDATE prestamos SET multa = 1  WHERE codigo='$dbCodigo' AND hora_entrega is NULL");
+           return mysql_query("UPDATE prestamos SET multa = 1, hora_entrega = NOW() WHERE codigo='$dbCodigo' AND hora_entrega is NULL");
         }
 
-        $sql = mysql_query("UPDATE prestamos SET hora_entrega = NOW()  WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
+        return mysql_query("UPDATE prestamos SET hora_entrega = NOW()  WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
 
     }
     
