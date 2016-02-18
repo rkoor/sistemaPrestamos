@@ -17,10 +17,10 @@ class PrestamosController {
     public function handleRequest() {
         $op = isset($_GET['op'])?$_GET['op']:NULL;
         try {
-            if ( !$op || $op == 'list' ) {
-                $this->listPrestamos();
-            } elseif ( $op == 'new' ) {
+            if ( !$op || $op == 'new' ) {
                 $this->savePrestamo();
+            } elseif ( $op == 'list' ) {
+                $this->listPrestamos();
             } elseif ( $op == 'update' ) {
                 $this->updatePrestamo();
             } else {
@@ -39,7 +39,7 @@ class PrestamosController {
 
     public function savePrestamo() {
        
-        $title = 'Nuevo Prestamo';
+        $title = 'Servicios Tecnológicos';
         
         $id_persona = '';
         $codigo = '';
@@ -66,7 +66,7 @@ class PrestamosController {
 
     public function updatePrestamo() {
        
-        $title = 'Entregar Prestamo';
+        $title = 'Servicios Tecnológicos';
         $codigo = '';
         $errors = array();
 

@@ -1,0 +1,7 @@
+
+md-tab-item{
+	color: #868686 !important;
+}
+md-tab-item.md-active{
+	color: #FFF !important;
+}
