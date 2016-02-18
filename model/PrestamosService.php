@@ -9,16 +9,16 @@ class PrestamosService {
     private $prestamosGateway    = NULL;
     
     private function openDb() {
-        if (!mysql_connect("localhost", "root", "")) {
+        if (!mysqli_connect("localhost", "root", "")) {
             throw new Exception("FALLO LA CONEXION AL SERVIDOR DE DB");
         }
-        if (!mysql_select_db("prestamo")) {
+        if (!mysqli_select_db("prestamo")) {
             throw new Exception("NO SE ENCONTRO LA BD");
         }
     }
     
     private function closeDb() {
-        mysql_close();
+        mysqli_close();
     }
   
     public function __construct() {
