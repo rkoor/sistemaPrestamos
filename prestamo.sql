@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-02-2016 a las 21:39:38
+-- Tiempo de generación: 18-02-2016 a las 19:45:36
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -38,7 +38,8 @@ CREATE TABLE `articulos` (
 
 INSERT INTO `articulos` (`codigo`, `nombre_articulo`, `descripcion`) VALUES
 ('adap01', 'adaptador mac', 'adaptador vga para mac'),
-('adap02', 'adaptador 2', 'adaptador ipad');
+('adap02', 'adaptador 2', 'adaptador ipad'),
+('1', 'articuloprueba', 'articulo prueba');
 
 -- --------------------------------------------------------
 
@@ -68,21 +69,33 @@ INSERT INTO `persona` (`id`, `nombre`, `carrera`, `escuela`) VALUES
 --
 
 CREATE TABLE `prestamos` (
-  `num_prestamo` int(6) NOT NULL,
   `id_persona` varchar(8) NOT NULL,
   `codigo` varchar(6) NOT NULL,
   `hora_prestamo` timestamp NULL DEFAULT NULL,
   `hora_entrega` timestamp NULL DEFAULT NULL,
-  `multa` int(1) NOT NULL
+  `multa` int(1) NOT NULL,
+  `num_prestamo` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `prestamos`
+-- Índices para tablas volcadas
 --
 
-INSERT INTO `prestamos` (`num_prestamo`, `id_persona`, `codigo`, `hora_prestamo`, `hora_entrega`, `multa`) VALUES
-(0, '9', '9', '2016-02-14 19:12:29', '2016-02-14 19:12:34', 0);
+--
+-- Indices de la tabla `prestamos`
+--
+ALTER TABLE `prestamos`
+  ADD PRIMARY KEY (`num_prestamo`);
 
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `prestamos`
+--
+ALTER TABLE `prestamos`
+  MODIFY `num_prestamo` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
