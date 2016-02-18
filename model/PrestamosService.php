@@ -9,16 +9,16 @@ class PrestamosService {
     private $prestamosGateway    = NULL;
     
     private function openDb() {
-        if (!mysqli_connect("localhost", "root", "")) {
+        $link = mysqli_connect('localhost', 'root', '', 'prestamo');
+        if (!mysqli_connect("localhost", "root", "", "prestamo")) {
             throw new Exception("FALLO LA CONEXION AL SERVIDOR DE DB");
         }
-        if (!mysqli_select_db("prestamo")) {
-            throw new Exception("NO SE ENCONTRO LA BD");
-        }
+        return $link;
     }
     
     private function closeDb() {
-        mysqli_close();
+        $link = mysqli_connect('localhost', 'root', '', 'prestamo');
+        mysqli_close($link);
     }
   
     public function __construct() {
