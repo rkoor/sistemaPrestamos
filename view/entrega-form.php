@@ -36,9 +36,9 @@
                                 <div ng-controller="Entregar" layout="column" ng-cloak class="md-inline-form">
                                  
                                     <div>
-                                      <md-input-container class="md-block">
+                                      <md-input-container focused class="md-block">
                                         <label>Código</label>
-                                        <input  md-maxlength="6" required ng-model="codigo">
+                                        <input required ng-model="codigo">
                                       </md-input-container>
                                       <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                                         <md-button class="md-primary md-raised" ng-click="entregar()">Enviar</md-button>

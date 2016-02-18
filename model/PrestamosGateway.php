@@ -20,11 +20,10 @@ class PrestamosGateway {
     public function selectById($id_persona) {
         $dbId = mysql_real_escape_string($id_persona);
         
-        $dbres = mysql_query("SELECT persona.nombre, persona.id, articulos.codigo 
+        $dbres = mysql_query("SELECT persona.nombre, persona.id, articulos.nombre_articulo, prestamos.codigo, prestamos.hora_prestamo, prestamos.hora_entrega 
                                 FROM persona, prestamos, articulos 
                                 WHERE persona.id=$dbId persona.id=prestamos.id_persona 
                                 AND prestamos.codigo=articulos.codigo ");
-        
         return mysql_fetch_object($dbres);
         
     }

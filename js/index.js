@@ -1,6 +1,6 @@
 var app =  angular.module('Prestamo', ['ngMaterial']);
 
-app.controller('Prestar', function($scope, $http) {
+app.controller('Prestar', function($scope, $http, $mdToast, $document) {
 	$scope.prestar = function(){
 		console.log($scope.id, $scope.codigo);
 		$http({
@@ -11,11 +11,19 @@ app.controller('Prestar', function($scope, $http) {
            })
            .success(function(res){
            	console.log(res);
+           	$mdToast.show(
+	                    $mdToast.simple()
+                        .textContent('Prestamo Guardado')                       
+                        .hideDelay(3000)
+	                  );
           });
-	}
-});
 
-app.controller('Entregar', function($scope, $http){
+      	$scope.codigo= undefined;
+		$scope.id= undefined;
+
+	}		
+});
+app.controller('Entregar', function($scope, $http, $mdToast, $document){
 	$scope.entregar = function(){
 		console.log($scope.codigo);
 		$http({
@@ -26,6 +34,12 @@ app.controller('Entregar', function($scope, $http){
 		})
 		.success(function(res){
 			console.log(res);
+			$mdToast.show(
+	                    $mdToast.simple()
+                        .textContent('Entregado')                       
+                        .hideDelay(3000)
+	                  );
 		});
+		$scope.codigo= undefined;
 	}
 })

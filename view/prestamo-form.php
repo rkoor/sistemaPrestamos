@@ -36,11 +36,11 @@
                     <md-card style="padding:30px">
                       <md-input-container class="md-block">
                         <label>ID</label>
-                        <input  md-maxlength="8" required ng-model="id" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                        <input  required ng-model="id">
                       </md-input-container>
                       <md-input-container class="md-block">
                         <label>Código</label>
-                        <input  md-maxlength="6" required ng-model="codigo">
+                        <input required ng-model="codigo">
                       </md-input-container>
                         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                             <md-button class="md-primary md-raised" ng-click="prestar()">Enviar</md-button>
