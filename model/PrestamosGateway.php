@@ -6,8 +6,8 @@ class PrestamosGateway {
             $order = "codigo";
         }
         $link = mysqli_connect('localhost', 'root', '', 'prestamo');
+        $link2 = mysqli_connect('localhost', 'root', '', 'alumnos');
         $dbres = mysqli_query($link, "SELECT * FROM Prestamos ORDER BY $order ASC");
-        
         $prestamos = array();
         while ( ($obj = mysqli_fetch_object($dbres)) != NULL ) {
             $prestamos[] = $obj;
@@ -16,7 +16,7 @@ class PrestamosGateway {
         return $prestamos;
     }
     
-    public function selectById($id_persona) {
+   /* public function selectById($id_persona) {
         $link = mysqli_connect('localhost', 'root', '', 'prestamo');
         $dbId = mysqli_real_escape_string($link, $id_persona);
         
@@ -26,7 +26,7 @@ class PrestamosGateway {
                                 AND prestamos.codigo=articulos.codigo ");
         return mysqli_fetch_object($dbres);
         
-    }
+    } */
 
     public function insert( $id_persona, $codigo ) {
         $link = mysqli_connect('localhost', 'root', '', 'prestamo');

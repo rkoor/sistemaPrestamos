@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2016 a las 19:45:36
+-- Tiempo de generación: 22-02-2016 a las 21:25:58
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -29,38 +29,33 @@ SET time_zone = "+00:00";
 CREATE TABLE `articulos` (
   `codigo` varchar(6) NOT NULL,
   `nombre_articulo` varchar(50) NOT NULL,
-  `descripcion` varchar(200) DEFAULT NULL
+  `descripcion` varchar(200) DEFAULT NULL,
+  `Estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `articulos`
 --
 
-INSERT INTO `articulos` (`codigo`, `nombre_articulo`, `descripcion`) VALUES
-('adap01', 'adaptador mac', 'adaptador vga para mac'),
-('adap02', 'adaptador 2', 'adaptador ipad'),
-('1', 'articuloprueba', 'articulo prueba');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `persona`
---
-
-CREATE TABLE `persona` (
-  `id` varchar(8) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `carrera` varchar(100) NOT NULL,
-  `escuela` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `persona`
---
-
-INSERT INTO `persona` (`id`, `nombre`, `carrera`, `escuela`) VALUES
-('00154459', 'raul cordero', 'ingenieria en sistemas', 'ingenieria'),
-('00000000', 'elvis cocho', 'medicina', 'medicina');
+INSERT INTO `articulos` (`codigo`, `nombre_articulo`, `descripcion`, `Estado`) VALUES
+('ADP08', 'Adaptador 8 VGA MAC', 'Adaptador VGA para MAC', 1),
+('ADP02', 'Adaptador 10" VGA MAC', 'Adaptador VGA para MAC', 1),
+('ADP11', 'Adaptador Multiple MAC', 'Adaptador VGA, HDMI, DPI. para MAC', 1),
+('ADP07', 'Adaptador 7 VGA MAC', 'Adaptador VGA para MAC', 1),
+('ADP06', 'Adaptador 6 VGA MAC', 'Adaptador VGA para MAC', 1),
+('ADP03', 'Adaptador 3 VGA MAC', 'Adaptador VGA para MAC', 1),
+('ADP01', 'Adaptador 1 VGA MAC', 'Adaptador VGA para MAC', 1),
+('TAB01', 'Surface', 'Tablet Microsoft Surface 1', 1),
+('TAB02', 'Surface', 'Tablet Microsoft Surface 2', 1),
+('BOC03', 'Bocinas', 'Bocinas Bluetooth Con Cables', 1),
+('BOC02', 'Bocinas', 'Bocinas Bluetooth Con cables', 1),
+('LAP01', 'Laptop', 'Computadora Laptop Dell Gris y cargador', 1),
+('LAP02', 'Laptop', 'Computadora laptop lenovo negra y cargador\r\n', 1),
+('LAP03', 'Laptop', 'Computadora laptop lenovo negra y cargador', 1),
+('AUD01', 'Audifonos', 'Audifonos Acteck', 1),
+('AUD02', 'Audifonos', 'Audifonos Acteck', 1),
+('AUD03', 'Audifonos', 'Audifonos Acteck', 1),
+('AUD04', 'Audifonos', 'Audifonos Acteck', 1);
 
 -- --------------------------------------------------------
 
@@ -69,12 +64,12 @@ INSERT INTO `persona` (`id`, `nombre`, `carrera`, `escuela`) VALUES
 --
 
 CREATE TABLE `prestamos` (
+  `num_prestamo` int(6) NOT NULL,
   `id_persona` varchar(8) NOT NULL,
   `codigo` varchar(6) NOT NULL,
   `hora_prestamo` timestamp NULL DEFAULT NULL,
   `hora_entrega` timestamp NULL DEFAULT NULL,
-  `multa` int(1) NOT NULL,
-  `num_prestamo` int(6) NOT NULL
+  `multa` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -95,7 +90,7 @@ ALTER TABLE `prestamos`
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `num_prestamo` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `num_prestamo` int(6) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
