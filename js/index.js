@@ -11,15 +11,23 @@ app.controller('Prestar', function($scope, $http, $mdToast, $document) {
            })
            .success(function(res){
            	console.log(res);
+           	if (res==1) {	
            	$mdToast.show(
 	                    $mdToast.simple()
                         .textContent('Prestamo Guardado')                       
                         .hideDelay(3000)
 	                  );
+           } else {
+           	$mdToast.show(
+	                    $mdToast.simple()
+                        .textContent('ERROR, Ingrese su ID y el codigo del Prestamo')                       
+                        .hideDelay(3000)
+	                  );
+           }
           });
 
-      	$scope.codigo= undefined;
-		$scope.id= undefined;
+      	$scope.codigo = undefined;
+		$scope.id = undefined;
 
 	}		
 });
@@ -34,11 +42,19 @@ app.controller('Entregar', function($scope, $http, $mdToast, $document){
 		})
 		.success(function(res){
 			console.log(res);
-			$mdToast.show(
+			if (res==1) {	
+           	$mdToast.show(
 	                    $mdToast.simple()
                         .textContent('Entregado')                       
                         .hideDelay(3000)
 	                  );
+           } else {
+           	$mdToast.show(
+	                    $mdToast.simple()
+                        .textContent('No se encontro el prestamo')                       
+                        .hideDelay(3000)
+	                  );
+           }
 		});
 		$scope.codigo= undefined;
 	}

@@ -38,20 +38,13 @@ class PrestamosController {
     }
 
     public function savePrestamo() {
-       
         $title = 'Servicios Tecnológicos';
-        
         $id_persona = '';
         $codigo = '';
-       
         $errors = array();
-        
         if ( isset($_POST['id_persona']) ) {
-            
             $id_persona       = isset($_POST['id_persona']) ?   $_POST['id_persona']  :NULL;
             $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;
-
-            
             try {
                 echo $this->prestamosService->createNewPrestamo($id_persona, $codigo);
                 //$this->redirect('index.php');
@@ -60,12 +53,10 @@ class PrestamosController {
                 $errors = $e->getErrors();
             }
         }
-        
         else include 'view/prestamo-form.php';
     }
-
-    public function updatePrestamo() {
-       
+    
+    public function updatePrestamo() {  
         $title = 'Servicios Tecnológicos';
         $codigo = '';
         $errors = array();
