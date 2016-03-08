@@ -58,4 +58,13 @@ app.controller('Entregar', function($scope, $http, $mdToast, $document){
 		});
 		$scope.codigo= undefined;
 	}
-})
+});
+
+	app.controller('Lista', ['$scope', '$http', function ($scope, $http) {
+		console.log("Hola");
+	    $http.get('http://localhost/sistema/?op=list')
+	    .success(function(data) {
+	    	console.log($scope.prestamos);
+	        $scope.prestamos = data;
+	    });
+	}]);

@@ -78,6 +78,40 @@
                   </md-content>
                   </div>
                 </md-tab>
+
+                <md-tab label="Prestamos ">
+                <div ng-controller="Lista" layout="column" ng-cloak >
+                  <md-content class="md-padding">
+                      <div layout="column">
+                          <div ng-controller="Lista"> 
+                            <table>
+                              <tr>
+                                <th>Nombre</th>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre Articulo</th>
+                                <th>Hora de Prestamo</th>
+                                <th>Hora de Entrega</th>
+                                <th>Multa</th>
+
+                              </tr>
+                              <tr ng-repeat="prestamo in prestamos.result">
+                                <td>{{ prestamo.nombre}}</td>
+                                <td>{{ prestamo.id}}</td>
+                                <td>{{ prestamo.codigo}}</td>
+                                <td>{{ prestamo.nombre_articulo}}</td>
+                                <td>{{ prestamo.hora_prestamo}}</td>
+                                <td>{{ prestamo.hora_entrega}}</td>
+                                <td>{{ prestamo.multa}}</td>
+
+                              </tr>
+                            </table>
+                          </div>
+                      </div>
+                  </md-content>
+                  </div>
+                </md-tab>
+
             </md-tabs>
             </div>
           </md-content>

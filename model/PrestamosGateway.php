@@ -1,19 +1,24 @@
 <?php
 
 class PrestamosGateway {
+
     public function selectAll($order) {
         if ( !isset($order) ) {
             $order = "codigo";
         }
-        $link = mysqli_connect('localhost', 'root', '', 'prestamo');
-        $link2 = mysqli_connect('localhost', 'root', '', 'alumnos');
-        $dbres = mysqli_query($link, "SELECT * FROM Prestamos ORDER BY $order ASC");
-        $prestamos = array();
-        while ( ($obj = mysqli_fetch_object($dbres)) != NULL ) {
-            $prestamos[] = $obj;
+        $link = mysqli_connect('localhost', 'root', '');
+        mysqli_set_charset($link, 'utf8');
+        $dbres = mysqli_query($link, "SELECT alumnos.alumnos.nombre, alumnos.alumnos.id, prestamo.articulos.codigo, prestamo.articulos.nombre_articulo, prestamo.prestamos.hora_prestamo, prestamo.prestamos.hora_entrega, prestamo.prestamos.multa FROM alumnos.alumnos, prestamo.articulos, prestamo.prestamos WHERE alumnos.alumnos.id=prestamo.prestamos.id_persona AND prestamo.prestamos.codigo=prestamo.articulos.codigo");
+
+        /*$prestamos = array();
+        while ( ($row = mysqli_fetch_row($dbres)) != NULL ) {
+            $prestamos['Prestamos'][] = $row;
         }
-        
-        return $prestamos;
+
+         $json = json_encode($prestamos); */
+        header('Content-Type: application/json');
+        echo json_encode(mysqli_fetch_assoc($dbres));
+         
     }
     
    /* public function selectById($id_persona) {

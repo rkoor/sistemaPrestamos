@@ -33,7 +33,8 @@ class PrestamosController {
     
     public function listPrestamos() {
         $orderby = isset($_GET['orderby'])?$_GET['orderby']:NULL;
-        $prestamos = $this->prestamosService->getAllPrestamos($orderby);
+        return $this->prestamosService->getAllPrestamos($orderby);
+        
         include 'view/prestamos.php';
     }
 
