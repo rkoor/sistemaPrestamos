@@ -23,7 +23,9 @@ class PrestamosController {
                 $this->listPrestamos();
             } elseif ( $op == 'update' ) {
                 $this->updatePrestamo();
-            } else {
+            } elseif ( $op == 'lista' ) {
+                $this->lista();
+            }  else {
                 $this->showError("Page not found", "Page for operation ".$op." was not found!");
             }
         } catch ( Exception $e ) {
@@ -32,7 +34,7 @@ class PrestamosController {
     }
     
     public function listPrestamos() {
-        $orderby = isset($_GET['orderby'])?$_GET['orderby']:NULL;
+        $orderby = isset($_GET['orderby'])?$_GET['orderb    y']:NULL;
         return $this->prestamosService->getAllPrestamos($orderby);
         
         include 'view/prestamos.php';
@@ -55,6 +57,11 @@ class PrestamosController {
             }
         }
         else include 'view/prestamo-form.php';
+    }
+
+        public function lista() {
+            include 'view/header.php';
+          include 'view/lista-form.php';
     }
     
     public function updatePrestamo() {  

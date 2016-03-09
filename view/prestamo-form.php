@@ -80,31 +80,33 @@
                 </md-tab>
 
                 <md-tab label="Prestamos ">
-                <div ng-controller="Lista" layout="column" ng-cloak >
-                  <md-content class="md-padding">
-                      <div layout="column">
-                          <div ng-controller="Lista"> 
+                <div  layout="column" ng-cloak >
+                  <md-content  >
+                      <div layout="column" ><!---ng-controller="Lista"-->
+                          <div   > 
                             <table>
                               <tr>
-                                <th>Nombre</th>
-                                <th>ID</th>
-                                <th>Codigo</th>
-                                <th>Nombre Articulo</th>
-                                <th>Hora de Prestamo</th>
-                                <th>Hora de Entrega</th>
-                                <th>Multa</th>
+                                <th><md-subheader class="md-no-sticky">Nombre</md-subheader></th>
+                                <th><md-subheader class="md-no-sticky">ID</md-subheader></th>
+                                <th><md-subheader class="md-no-sticky">Código</md-subheader></th>
+                                <th><md-subheader class="md-no-sticky">Nombre del Artículo</md-subheader></th>
+                                <th><md-subheader class="md-no-sticky">Hora de préstamo</md-subheader></th>
+                                <th><md-subheader class="md-no-sticky">Hora Entrega</md-subheader></th>
+                                <th><md-subheader class="md-no-sticky">Multa</md-subheader></th>
 
                               </tr>
-                              <tr ng-repeat="prestamo in prestamos.result">
-                                <td>{{ prestamo.nombre}}</td>
-                                <td>{{ prestamo.id}}</td>
-                                <td>{{ prestamo.codigo}}</td>
-                                <td>{{ prestamo.nombre_articulo}}</td>
-                                <td>{{ prestamo.hora_prestamo}}</td>
-                                <td>{{ prestamo.hora_entrega}}</td>
-                                <td>{{ prestamo.multa}}</td>
-
-                              </tr>
+                              <div ng-repeat="prestamo in prestamos">
+                                    <tr >
+                                      <td ><md-list-item >{{ prestamos.nombre}}</md-list-item> </td>
+                                      <td><md-list-item >{{ prestamos.id}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamos.codigo}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamos.articulo}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamos.hora_prestamo}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamos.hora_entrega}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamos.multa}}</md-list-item></td>
+                                    
+                                    </tr>
+                              </div>
                             </table>
                           </div>
                       </div>
@@ -115,6 +117,12 @@
             </md-tabs>
             </div>
           </md-content>
-        </div>          
+        </div>  
+
+    <a href="index.php?op=lista">Listas</a>
     </body>
 </html>
+
+
+
+

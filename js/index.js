@@ -64,7 +64,10 @@ app.controller('Entregar', function($scope, $http, $mdToast, $document){
 		console.log("Hola");
 	    $http.get('http://localhost/sistema/?op=list')
 	    .success(function(data) {
-	    	console.log($scope.prestamos);
+    
 	        $scope.prestamos = data;
+
+	       	console.log($scope.prestamos);
+
 	    });
 	}]);
