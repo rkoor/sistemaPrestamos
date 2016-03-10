@@ -12,47 +12,43 @@
     <script src="js/index.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
         
-        <title>
-        <?php print htmlentities($title) ?>
-        </title>
+      
     </head>
     <body layout="column" style="background:#001525">
-                <md-tab label="Prestamos ">
-                <div  layout="column" ng-cloak >
-                  <md-content  >
+              <div color="#FFFF" layout="column">
+                
+                    <img src="http://www.anahuacoaxaca.edu.mx/images/galerias/tecnologias/logo-servtec-blanco.png" style="margin: 0 auto;">
+                    
+              
+                
+                 
                       <div layout="column" ng-controller="Lista">
-                          <div   > 
-                            <table>
-                              <tr>
-                                <th><md-subheader class="md-no-sticky">Nombre</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">ID</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Código</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Nombre del Artículo</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Hora de préstamo</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Hora Entrega</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Multa</md-subheader></th>
-
-                              </tr>
+                          <div> 
+                            <table align="center">
+                                <tr>
+                                  <th>Nombre</th>
+                                  <th>ID</th>
+                                  <th>Código</th>
+                                  <th>Nombre del Artículo</th>
+                                  <th>Hora de préstamo</th>
+                                  <th>Hora Entrega</th>
+                                  <th>Multa</th>
+                                </tr>
                               <div ng-repeat="prestamo in prestamos">
                                     <tr >
-                                      <td ><md-list-item >{{ prestamos.nombre}}</md-list-item> </td>
-                                      <td><md-list-item >{{ prestamos.id}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.codigo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.articulo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.hora_prestamo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.hora_entrega}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.multa}}</md-list-item></td>
-                                    
+                                      <td><md-list-item >{{ prestamo.nombre}}</md-list-item> </td>
+                                      <td><md-list-item >{{ prestamo.id}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamo.codigo}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamo.nombre_articulo}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamo.hora_prestamo}}</md-list-item></td>
+                                      <td><md-list-item >{{ prestamo.hora_entrega}}</md-list-item></td>
+                                      <td><md-list-item ><md-checkbox class="md-secondary" ng-model="topping.wanted"></md-list-item> </td>
                                     </tr>
                               </div>
                             </table>
                           </div>
                       </div>
-                  </md-content>
-                  </div>
-                </md-tab>
 
-
-    </body>
+                  </body>
 </html>
 

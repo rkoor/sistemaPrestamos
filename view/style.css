@@ -5,3 +5,28 @@ md-tab-item{
 md-tab-item.md-active{
 	color: #FFF !important;
 }
+
+table, th , td {
+  border-bottom: 1px solid #ddd;
+  border-collapse: collapse;
+  background-color: #f2f2f2
+  
+}
+
+tr:hover {background-color: #f5f5f5}
+/*
+tr:nth-child(even) {background-color: #f2f2f2}
+tr:nth-child(even):hover {background-color: #f1f1f1}
+*/
+th{
+	background-color: #ffffff;
+    color: black;
+}
+th, td {
+	padding: 2px;
+	text-align: left;
+}
+
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {
+    background-color: rgba(0,19,37,1);
+}

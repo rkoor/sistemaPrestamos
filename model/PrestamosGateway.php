@@ -10,14 +10,14 @@ class PrestamosGateway {
         mysqli_set_charset($link, 'utf8');
         $dbres = mysqli_query($link, "SELECT alumnos.alumnos.nombre, alumnos.alumnos.id, prestamo.articulos.codigo, prestamo.articulos.nombre_articulo, prestamo.prestamos.hora_prestamo, prestamo.prestamos.hora_entrega, prestamo.prestamos.multa FROM alumnos.alumnos, prestamo.articulos, prestamo.prestamos WHERE alumnos.alumnos.id=prestamo.prestamos.id_persona AND prestamo.prestamos.codigo=prestamo.articulos.codigo");
 
-        /*$prestamos = array();
+        $prestamos = array();
         while ( ($row = mysqli_fetch_row($dbres)) != NULL ) {
             $prestamos['Prestamos'][] = $row;
         }
 
-         $json = json_encode($prestamos); */
+         $json = json_encode($prestamos); 
         header('Content-Type: application/json');
-        echo json_encode(mysqli_fetch_assoc($dbres));
+        echo $json;
          
     }
     

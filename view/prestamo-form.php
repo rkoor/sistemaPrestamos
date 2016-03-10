@@ -63,15 +63,15 @@
                       <div layout="column">
                           <form method="POST" action="">
                               <div layout="column">
-                                          <div ng-controller="Entregar" layout="column" ng-cloak class="md-inline-form">                               
-                                                <md-input-container focused class="md-block">
-                                                  <label>Código</label>
-                                                  <input required ng-model="codigo">
-                                                </md-input-container>
-                                                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                                                  <md-button class="md-primary md-raised" ng-click="entregar()">Enviar</md-button>
-                                                </section>
-                                          </div>
+                                <div ng-controller="Entregar" layout="column" ng-cloak class="md-inline-form">                               
+                                      <md-input-container focused class="md-block">
+                                        <label>Código</label>
+                                        <input required ng-model="codigo">
+                                      </md-input-container>
+                                      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                                        <md-button class="md-primary md-raised" ng-click="entregar()">Enviar</md-button>
+                                      </section>
+                                </div>
                               </div>
                           </form>
                       </div>
@@ -103,8 +103,7 @@
                                       <td><md-list-item >{{ prestamos.articulo}}</md-list-item></td>
                                       <td><md-list-item >{{ prestamos.hora_prestamo}}</md-list-item></td>
                                       <td><md-list-item >{{ prestamos.hora_entrega}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.multa}}</md-list-item></td>
-                                    
+                                      <td><md-list-item >{{ prestamos.multa}}</md-list-item></td>                                    
                                     </tr>
                               </div>
                             </table>

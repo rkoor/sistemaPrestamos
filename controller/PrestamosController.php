@@ -59,8 +59,8 @@ class PrestamosController {
         else include 'view/prestamo-form.php';
     }
 
-        public function lista() {
-            include 'view/header.php';
+    public function lista() {
+        
           include 'view/lista-form.php';
     }
     
