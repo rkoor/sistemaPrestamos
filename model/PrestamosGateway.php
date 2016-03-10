@@ -8,17 +8,20 @@ class PrestamosGateway {
         }
         $link = mysqli_connect('localhost', 'root', '');
         mysqli_set_charset($link, 'utf8');
-        $dbres = mysqli_query($link, "SELECT alumnos.alumnos.nombre, alumnos.alumnos.id, prestamo.articulos.codigo, prestamo.articulos.nombre_articulo, prestamo.prestamos.hora_prestamo, prestamo.prestamos.hora_entrega, prestamo.prestamos.multa FROM alumnos.alumnos, prestamo.articulos, prestamo.prestamos WHERE alumnos.alumnos.id=prestamo.prestamos.id_persona AND prestamo.prestamos.codigo=prestamo.articulos.codigo");
+        $dbres = mysqli_query($link, "SELECT alumnos.alumnos.nombre as nombre, alumnos.alumnos.id as id, prestamo.articulos.codigo as codigo, prestamo.articulos.nombre_articulo as nombre_articulo, prestamo.prestamos.hora_prestamo as hora_prestamo, prestamo.prestamos.hora_entrega as hora_entrega, prestamo.prestamos.multa as multa FROM alumnos.alumnos, prestamo.articulos, prestamo.prestamos WHERE alumnos.alumnos.id=prestamo.prestamos.id_persona AND prestamo.prestamos.codigo=prestamo.articulos.codigo ORDER BY prestamo.prestamos.hora_prestamo ASC");
 
         $prestamos = array();
-        while ( ($row = mysqli_fetch_row($dbres)) != NULL ) {
-            $prestamos['Prestamos'][] = $row;
-        }
+        while ( ($row = mysqli_fetch_assoc($dbres)) != NULL ) {
+        $prestamos['prestamos'][]= $row;
+      
 
-         $json = json_encode($prestamos); 
+
+        } 
         header('Content-Type: application/json');
-        echo $json;
-         
+        print json_encode($prestamos); 
+       
+      
+         mysqli_close($link);
     }
     
    /* public function selectById($id_persona) {

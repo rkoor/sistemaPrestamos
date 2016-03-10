@@ -78,39 +78,6 @@
                   </md-content>
                   </div>
                 </md-tab>
-
-                <md-tab label="Prestamos ">
-                <div  layout="column" ng-cloak >
-                  <md-content  >
-                      <div layout="column" ><!---ng-controller="Lista"-->
-                          <div   > 
-                            <table>
-                              <tr>
-                                <th><md-subheader class="md-no-sticky">Nombre</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">ID</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Código</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Nombre del Artículo</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Hora de préstamo</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Hora Entrega</md-subheader></th>
-                                <th><md-subheader class="md-no-sticky">Multa</md-subheader></th>
-
-                              </tr>
-                              <div ng-repeat="prestamo in prestamos">
-                                    <tr >
-                                      <td ><md-list-item >{{ prestamos.nombre}}</md-list-item> </td>
-                                      <td><md-list-item >{{ prestamos.id}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.codigo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.articulo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.hora_prestamo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.hora_entrega}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamos.multa}}</md-list-item></td>                                    
-                                    </tr>
-                              </div>
-                            </table>
-                          </div>
-                      </div>
-                  </md-content>
-                  </div>
                 </md-tab>
 
             </md-tabs>
@@ -118,7 +85,8 @@
           </md-content>
         </div>  
 
-    <a href="index.php?op=lista">Listas</a>
+    <md-button class="md-primary md-raised" href="index.php?op=lista">Listas</md-button>
+    
     </body>
 </html>
 

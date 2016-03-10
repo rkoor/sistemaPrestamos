@@ -34,17 +34,17 @@
                                   <th>Hora Entrega</th>
                                   <th>Multa</th>
                                 </tr>
-                              <div ng-repeat="prestamo in prestamos">
-                                    <tr >
-                                      <td><md-list-item >{{ prestamo.nombre}}</md-list-item> </td>
-                                      <td><md-list-item >{{ prestamo.id}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamo.codigo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamo.nombre_articulo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamo.hora_prestamo}}</md-list-item></td>
-                                      <td><md-list-item >{{ prestamo.hora_entrega}}</md-list-item></td>
+                              
+                                    <tr ng-repeat="item in items.prestamos">
+                                      <td><md-list-item >{{ item.nombre}}</md-list-item> </td>
+                                      <td><md-list-item >{{ item.id}}</md-list-item></td>
+                                      <td><md-list-item >{{ item.codigo}}</md-list-item></td>
+                                      <td><md-list-item >{{ item.nombre_articulo}}</md-list-item></td>
+                                      <td><md-list-item >{{ item.hora_prestamo}}</md-list-item></td>
+                                      <td><md-list-item >{{ item.hora_entrega}}</md-list-item></td>
                                       <td><md-list-item ><md-checkbox class="md-secondary" ng-model="topping.wanted"></md-list-item> </td>
                                     </tr>
-                              </div>
+                              
                             </table>
                           </div>
                       </div>
