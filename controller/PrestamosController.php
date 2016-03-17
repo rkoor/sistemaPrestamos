@@ -21,10 +21,14 @@ class PrestamosController {
                 $this->savePrestamo();
             } elseif ( $op == 'list' ) {
                 $this->listPrestamos();
+            } elseif ( $op == 'nuevo' ) {
+                $this->guardaPrestamo();
             } elseif ( $op == 'update' ) {
                 $this->updatePrestamo();
             } elseif ( $op == 'lista' ) {
                 $this->lista();
+            } elseif ( $op == 'valid' ) {
+                $this->validacion();
             }  else {
                 $this->showError("Page not found", "Page for operation ".$op." was not found!");
             }
@@ -39,7 +43,21 @@ class PrestamosController {
         
         include 'view/prestamos.php';
     }
-
+    public function guardaPrestamo(){
+         $title = 'Servicios Tecnológicos';
+        $id_persona = '';
+        $codigo = '';
+        $errors = array();
+        if ( isset($_POST['id_persona']) ) {
+            $id_persona       = isset($_POST['id_persona']) ?   $_POST['id_persona']  :NULL;
+            $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;
+            try {
+                return $this->prestamosService->createNewPrestamo($id_persona, $codigo);
+            } catch (ValidationException $e) {
+                $errors = $e->getErrors();
+            }
+        }
+    }
     public function savePrestamo() {
         $title = 'Servicios Tecnológicos';
         $id_persona = '';
@@ -49,14 +67,20 @@ class PrestamosController {
             $id_persona       = isset($_POST['id_persona']) ?   $_POST['id_persona']  :NULL;
             $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;
             try {
-                echo $this->prestamosService->createNewPrestamo($id_persona, $codigo);
-                //$this->redirect('index.php');
-                //return;
+                return $this->prestamosService->createNewPrestamo($id_persona, $codigo);
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
         }
         else include 'view/prestamo-form.php';
+    }
+
+    public function validacion(){
+        $title = 'Servicios Tecnológicos';
+        $id_person      = $_GET['id_persona'];
+        $codigo           = $_GET['codigo'];
+        echo $this->prestamosService->validarPrestamo($id_person, $codigo);
+      //  include 'view/bal.php';
     }
 
     public function lista() {

@@ -8,7 +8,7 @@ class PrestamosGateway {
         }
         $link = mysqli_connect('localhost', 'root', '');
         mysqli_set_charset($link, 'utf8');
-        $dbres = mysqli_query($link, "SELECT alumnos.alumnos.nombre as nombre, alumnos.alumnos.id as id, prestamo.articulos.codigo as codigo, prestamo.articulos.nombre_articulo as nombre_articulo, prestamo.prestamos.hora_prestamo as hora_prestamo, prestamo.prestamos.hora_entrega as hora_entrega, prestamo.prestamos.multa as multa FROM alumnos.alumnos, prestamo.articulos, prestamo.prestamos WHERE alumnos.alumnos.id=prestamo.prestamos.id_persona AND prestamo.prestamos.codigo=prestamo.articulos.codigo ORDER BY prestamo.prestamos.hora_prestamo ASC");
+        $dbres = mysqli_query($link, "SELECT alumnos.alumnos.nombre as nombre, alumnos.alumnos.id as id, prestamo.articulos.codigo as codigo, prestamo.articulos.nombre_articulo as nombre_articulo, prestamo.prestamos.hora_prestamo as hora_prestamo, prestamo.prestamos.hora_entrega as hora_entrega, prestamo.prestamos.multa as multa FROM alumnos.alumnos, prestamo.articulos, prestamo.prestamos WHERE alumnos.alumnos.id=prestamo.prestamos.id_persona AND prestamo.prestamos.codigo=prestamo.articulos.codigo ORDER BY prestamo.prestamos.hora_prestamo DESC");
 
         $prestamos = array();
         while ( ($row = mysqli_fetch_assoc($dbres)) != NULL ) {
@@ -35,7 +35,25 @@ class PrestamosGateway {
         return mysqli_fetch_object($dbres);
         
     } */
+    public function selectValid($id_persona, $codigo){
+        $link = mysqli_connect('localhost', 'root', '', '');
+        mysqli_set_charset($link, 'utf8');
+        $dbId_persona = ($id_persona != NULL)?"'".mysqli_real_escape_string($link, $id_persona)."'":'NULL';
+        $dbCodigo = ($codigo != NULL)?"'".mysqli_real_escape_string($link, $codigo)."'":'NULL';
+        $valNombre = mysqli_query($link, "SELECT alumnos.alumnos.nombre FROM alumnos.alumnos WHERE alumnos.alumnos.id= $dbId_persona");
+        $valArti = mysqli_query($link, "SELECT prestamo.articulos.nombre_articulo FROM prestamo.articulos WHERE prestamo.articulos.codigo= $dbCodigo");
+                $row = array(mysqli_fetch_assoc($valNombre), mysqli_fetch_assoc($valArti));
+        print json_encode($row);
+        
+        
+        /*while (($r=mysqli_fetch_assoc($valNombre)) !=NULL ){
+            $row['nombres']= $r;
+        }
+        header('Content-Type: application/json');
+        print_r( $row); */
+        mysqli_close($link);
 
+    }
     public function insert( $id_persona, $codigo ) {
         $link = mysqli_connect('localhost', 'root', '', 'prestamo');
         $link2 = mysqli_connect('localhost', 'root', '', 'alumnos');
@@ -67,11 +85,8 @@ class PrestamosGateway {
         
         print_r(mysqli_query($link, "UPDATE articulos SET estado = 1 WHERE codigo = '$dbCodigo' "));
         if ($multa >= 1) {
-            
            return mysqli_query($link, "UPDATE prestamos SET multa = 1, hora_entrega = NOW() WHERE codigo='$dbCodigo' AND hora_entrega is NULL");
         }
-
-        
         return mysqli_query($link, "UPDATE prestamos SET hora_entrega = NOW()  WHERE codigo='$dbCodigo' AND hora_entrega IS NULL");
 
     }

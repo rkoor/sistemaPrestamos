@@ -55,7 +55,13 @@
                         </form>
                     </div>
                 </md-content>
-              </div>   
+                <div ng-repeat="hola in holas">
+                  <p>{{hola.nombre}} </p>
+                  <p>{{hola.nombre_articulo}} </p>
+                </div>
+              </div>
+
+
             </md-tab>
                 <md-tab label="ENTREGA">
                 <div ng-controller="Entregar" layout="column" ng-cloak >
@@ -84,8 +90,10 @@
             </div>
           </md-content>
         </div>  
-
-    <md-button class="md-primary md-raised" href="index.php?op=lista">Listas</md-button>
+        <md-button class="md-fab md-mini md-primary" aria-label="Use Android" href="index.php?op=lista">
+          <md-icon ></md-icon>
+        </md-button>
+    
     
     </body>
 </html>
