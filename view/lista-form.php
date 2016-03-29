@@ -42,7 +42,8 @@
                                       <td><md-list-item >{{ item.nombre_articulo}}</md-list-item></td>
                                       <td><md-list-item >{{ item.hora_prestamo}}</md-list-item></td>
                                       <td><md-list-item >{{ item.hora_entrega}}</md-list-item></td>
-                                      <td><md-list-item ><md-checkbox class="md-secondary" ng-model="topping.wanted"></md-list-item> </td>
+                                      <td ng-if="item.multa==1"><md-list-item ><md-checkbox class="md-secondary" ng-model="checked" ng-init="checked=true"  ng-change="change(item.id,item.codigo )" ></md-list-item> </td>
+                                      <td ng-if="item.multa==0"><md-list-item ><md-checkbox class="md-secondary" ng-model="checked" ng-init="checked=false" disabled></md-list-item> </td>
                                     </tr>
                               
                             </table>

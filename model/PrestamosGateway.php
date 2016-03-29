@@ -24,6 +24,15 @@ class PrestamosGateway {
          mysqli_close($link);
     }
     
+    public function selectValidId($id_persona){
+        $link = mysqli_connect('localhost', 'root', '');
+        mysqli_set_charset($link, 'utf8');
+        $dbId_persona = ($id_persona != NULL)?"'".mysqli_real_escape_string($link, $id_persona)."'":'NULL';
+        $valNombre = mysqli_query($link, "SELECT alumnos.alumnos.nombre FROM alumnos.alumnos WHERE alumnos.alumnos.id= $dbId_persona");
+        $row = mysqli_fetch_assoc($valNombre);
+        print json_encode($row);
+        mysqli_close($link);
+    }
    /* public function selectById($id_persona) {
         $link = mysqli_connect('localhost', 'root', '', 'prestamo');
         $dbId = mysqli_real_escape_string($link, $id_persona);

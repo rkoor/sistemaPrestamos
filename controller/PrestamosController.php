@@ -27,9 +27,11 @@ class PrestamosController {
                 $this->updatePrestamo();
             } elseif ( $op == 'lista' ) {
                 $this->lista();
+            } elseif ( $op == 'validpersona' ) {
+                $this->validacionId();
             } elseif ( $op == 'valid' ) {
                 $this->validacion();
-            }  else {
+            } else {
                 $this->showError("Page not found", "Page for operation ".$op." was not found!");
             }
         } catch ( Exception $e ) {
@@ -38,7 +40,7 @@ class PrestamosController {
     }
     
     public function listPrestamos() {
-        $orderby = isset($_GET['orderby'])?$_GET['orderb    y']:NULL;
+        $orderby = isset($_GET['orderby'])?$_GET['orderby']:NULL;
         return $this->prestamosService->getAllPrestamos($orderby);
         
         include 'view/prestamos.php';
@@ -75,11 +77,17 @@ class PrestamosController {
         else include 'view/prestamo-form.php';
     }
 
+    public function validacionId(){
+        $title = 'Servicios Tecnológicos';
+        $id_persona     = $_GET['id_persona'];
+        echo $this->prestamosService->validarId($id_persona);
+    }
+
     public function validacion(){
         $title = 'Servicios Tecnológicos';
-        $id_person      = $_GET['id_persona'];
+        $id_persona     = $_GET['id_persona'];
         $codigo           = $_GET['codigo'];
-        echo $this->prestamosService->validarPrestamo($id_person, $codigo);
+        echo $this->prestamosService->validarPrestamo($id_persona, $codigo);
       //  include 'view/bal.php';
     }
 

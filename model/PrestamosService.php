@@ -48,7 +48,18 @@ class PrestamosService {
             throw $e;
         }
     }
-    
+    public function validarId($id_persona){
+        try{
+            $this->openDb();
+            $res=$this->prestamosGateway->selectValidId($id_persona);
+            $this->closeDb();
+            return $res;
+        } catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+    }
+
     private function validatePrestamoParams( $id_persona, $codigo ) {
         $errors = array();
         if ( !isset($id_persona) || empty($id_persona) ) {
