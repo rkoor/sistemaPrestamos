@@ -25,10 +25,12 @@ class PrestamosController {
                 $this->guardaPrestamo();
             } elseif ( $op == 'update' ) {
                 $this->updatePrestamo();
+            } elseif ( $op == 'updatevalid' ) {
+                $this->updateValid();
+            } elseif ( $op == 'updatemulta' ) {
+                $this->updateMulta();
             } elseif ( $op == 'lista' ) {
                 $this->lista();
-            } elseif ( $op == 'validpersona' ) {
-                $this->validacionId();
             } elseif ( $op == 'valid' ) {
                 $this->validacion();
             } else {
@@ -39,6 +41,19 @@ class PrestamosController {
         }
     }
     
+
+    public function updateMulta(){
+        $title = 'Servicios Tecnológicos';
+        $multa_hora           = isset($_GET['multa_hora'])?   $_GET['multa_hora'] :NULL;
+        echo $multa_hora;
+        echo $this->prestamosService->updateMulta($multa_hora);
+    }
+
+    public function updateValid(){
+        $title = 'Servicios Tecnológicos';
+        $codigo           = $_GET['codigo'];
+        echo $this->prestamosService->updateValid($codigo);
+    }
     public function listPrestamos() {
         $orderby = isset($_GET['orderby'])?$_GET['orderby']:NULL;
         return $this->prestamosService->getAllPrestamos($orderby);
@@ -49,16 +64,15 @@ class PrestamosController {
          $title = 'Servicios Tecnológicos';
         $id_persona = '';
         $codigo = '';
-        $errors = array();
-        if ( isset($_POST['id_persona']) ) {
-            $id_persona       = isset($_POST['id_persona']) ?   $_POST['id_persona']  :NULL;
-            $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;
+        $errors = array();  
+            $id_persona       = isset($_GET['id_persona']) ?   $_GET['id_persona']  :NULL;
+            $codigo           = isset($_GET['codigo'])?   $_GET['codigo'] :NULL;
             try {
-                return $this->prestamosService->createNewPrestamo($id_persona, $codigo);
+                echo $this->prestamosService->createNewPrestamo($id_persona, $codigo);
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
-        }
+        
     }
     public function savePrestamo() {
         $title = 'Servicios Tecnológicos';
@@ -69,6 +83,7 @@ class PrestamosController {
             $id_persona       = isset($_POST['id_persona']) ?   $_POST['id_persona']  :NULL;
             $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;
             try {
+                echo "hola";
                 return $this->prestamosService->createNewPrestamo($id_persona, $codigo);
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
@@ -77,11 +92,6 @@ class PrestamosController {
         else include 'view/prestamo-form.php';
     }
 
-    public function validacionId(){
-        $title = 'Servicios Tecnológicos';
-        $id_persona     = $_GET['id_persona'];
-        echo $this->prestamosService->validarId($id_persona);
-    }
 
     public function validacion(){
         $title = 'Servicios Tecnológicos';

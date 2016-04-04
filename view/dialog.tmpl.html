@@ -1,0 +1,39 @@
+<md-dialog aria-label="Autocomplete Dialog Example" ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Registrar persona</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <form method="POST" action="">
+
+          <md-input-container class="md-block">
+            <label>ID</label>
+            <input  required ng-model="id">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Nombre</label>
+            <input  required ng-model="nombre">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Escuela</label>
+            <input  required ng-model="escuela">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Carrera</label>
+            <input  required ng-model="carrera">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Semestre</label>
+            <input  required ng-model="semestre">
+          </md-input-container>
+      
+      </form>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button aria-label="Registrar" ng-click="registrar()">Registrar</md-button>
+  </md-dialog-actions>
+</md-dialog>

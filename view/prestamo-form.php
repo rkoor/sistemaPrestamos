@@ -55,10 +55,6 @@
                         </form>
                     </div>
                 </md-content>
-                <div ng-repeat="hola in holas">
-                  <p>{{hola.nombre}} </p>
-                  <p>{{hola.nombre_articulo}} </p>
-                </div>
               </div>
 
 
@@ -69,13 +65,13 @@
                       <div layout="column">
                           <form method="POST" action="">
                               <div layout="column">
-                                <div ng-controller="Entregar" layout="column" ng-cloak class="md-inline-form">                               
+                                <div ng-controller="Entregar" layout="column" ng-cloak class="md-inline-form">               
                                       <md-input-container focused class="md-block">
                                         <label>Código</label>
                                         <input required ng-model="codigo">
                                       </md-input-container>
                                       <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                                        <md-button class="md-primary md-raised" ng-click="entregar()">Enviar</md-button>
+                                        <md-button class="md-primary md-raised" ng-click="pentregar()">Enviar</md-button>
                                       </section>
                                 </div>
                               </div>
@@ -85,16 +81,13 @@
                   </div>
                 </md-tab>
                 </md-tab>
-
             </md-tabs>
             </div>
           </md-content>
         </div>  
         <md-button class="md-fab md-mini md-primary" aria-label="Use Android" href="index.php?op=lista">
           <md-icon ></md-icon>
-        </md-button>
-    
-    
+        </md-button> 
     </body>
 </html>
 

@@ -16,6 +16,31 @@ class PrestamosService {
         return $link;
     }
     
+    public function updateMulta($multa_hora){
+        try{
+            $this->openDb();
+            
+            $res=$this->prestamosGateway->updateMulta($multa_hora);
+            $this->closeDb();
+            return $res;
+        } catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+    }
+
+    public function updateValid($codigo){
+        try{
+            $this->openDb();
+            $res=$this->prestamosGateway->updateValid($codigo);
+            $this->closeDb();
+            return $res;
+        } catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+    }
+
     private function closeDb() {
         $link = mysqli_connect('localhost', 'root', '', 'prestamo');
         mysqli_close($link);
@@ -41,17 +66,6 @@ class PrestamosService {
         try{
             $this->openDb();
             $res=$this->prestamosGateway->selectValid($id_persona, $codigo);
-            $this->closeDb();
-            return $res;
-        } catch (Exception $e) {
-            $this->closeDb();
-            throw $e;
-        }
-    }
-    public function validarId($id_persona){
-        try{
-            $this->openDb();
-            $res=$this->prestamosGateway->selectValidId($id_persona);
             $this->closeDb();
             return $res;
         } catch (Exception $e) {
