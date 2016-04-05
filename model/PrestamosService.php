@@ -29,6 +29,18 @@ class PrestamosService {
         }
     }
 
+    public function updateExiste($codigo){
+        try{
+            $this->openDb();
+            $res=$this->prestamosGateway->updateExiste($codigo);
+            $this->closeDb();
+            return $res;
+        } catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+    }
+    
     public function updateValid($codigo){
         try{
             $this->openDb();
@@ -98,7 +110,7 @@ class PrestamosService {
         }
     }
 
-    public function updatePrestamo( $codigo ) {
+    public function updatePrestamo($codigo) {
         try {
             $this->openDb();
             $res = $this->prestamosGateway->update($codigo);

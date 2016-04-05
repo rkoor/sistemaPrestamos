@@ -86,7 +86,9 @@
           </md-content>
         </div>  
         <md-button class="md-fab md-mini md-primary" aria-label="Use Android" href="index.php?op=lista">
-          <md-icon ></md-icon>
+          <md-tooltip md-direction="right">
+            LISTADO DE PRESTAMOS
+          </md-tooltip>
         </md-button> 
     </body>
 </html>

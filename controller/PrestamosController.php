@@ -31,6 +31,8 @@ class PrestamosController {
                 $this->updateMulta();
             } elseif ( $op == 'lista' ) {
                 $this->lista();
+            } elseif ( $op == 'articuloexists' ){
+                $this->updateExiste();
             } elseif ( $op == 'valid' ) {
                 $this->validacion();
             } else {
@@ -41,6 +43,11 @@ class PrestamosController {
         }
     }
     
+    public function updateExiste(){
+        $title='Servicios Tecnológicos';
+        $codigo = $_GET['codigo'];
+        echo $this->prestamosService->updateExiste($codigo);
+    }
 
     public function updateMulta(){
         $title = 'Servicios Tecnológicos';
@@ -67,6 +74,7 @@ class PrestamosController {
         $errors = array();  
             $id_persona       = isset($_GET['id_persona']) ?   $_GET['id_persona']  :NULL;
             $codigo           = isset($_GET['codigo'])?   $_GET['codigo'] :NULL;
+
             try {
                 echo $this->prestamosService->createNewPrestamo($id_persona, $codigo);
             } catch (ValidationException $e) {
@@ -111,7 +119,7 @@ class PrestamosController {
         $codigo = '';
         $errors = array();
 
-        if ( isset($_POST['codigo']) ) {
+        
             $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;          
             try {
                 echo $this->prestamosService->updatePrestamo($codigo);
@@ -120,9 +128,8 @@ class PrestamosController {
             } catch (ValidationException $e) {
                 $errors = $e->getErrors();
             }
-        }
         
-       else include 'view/entrega-form.php';
+        
     }
 
     public function showError($title, $message) {

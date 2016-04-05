@@ -21,10 +21,15 @@ tr:nth-child(even):hover {background-color: #f1f1f1}
 th{
 	background-color: #ffffff;
     color: black;
+    text-align: center;
+}
+td{
+	padding-left:10px;
+	align-items: center;
 }
 th, td {
 	padding: 2px;
-	text-align: left;
+	text-align: center;
 }
 
 md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon {

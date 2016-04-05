@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="Prestamo">
+<html ng-app="Prestamo" style="background:#001525">
     <head>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="view/style.css">
@@ -18,7 +18,11 @@
               <div color="#FFFF" layout="column">
                 
                     <img src="http://www.anahuacoaxaca.edu.mx/images/galerias/tecnologias/logo-servtec-blanco.png" style="margin: 0 auto;">
-                    
+                    <md-button class="md-fab md-mini md-primary" aria-label="Use Android" href="index.php">
+                      <md-tooltip md-direction="right">
+                        PRESTAMO Y ENTREGA
+                      </md-tooltip>
+                    </md-button>
               
                 
                  
@@ -31,8 +35,9 @@
                                   <th>Código</th>
                                   <th>Nombre del Artículo</th>
                                   <th>Hora de préstamo</th>
-                                  <th>Hora Entrega</th>
+                                  <th>Hora de entrega</th>
                                   <th>Multa</th>
+                                  <th>Horas prestado</th>
                                 </tr>
                               
                                     <tr ng-repeat="item in items.prestamos">
@@ -44,6 +49,7 @@
                                       <td><md-list-item >{{ item.hora_entrega}}</md-list-item></td>
                                       <td ng-if="item.multa==1"><md-list-item ><md-checkbox class="md-secondary" ng-model="checked" ng-init="checked=true"  ng-change="change(item.hora_entrega)" ></md-list-item> </td>
                                       <td ng-if="item.multa==0"><md-list-item ><md-checkbox class="md-secondary" ng-model="checked" ng-init="checked=false" disabled></md-list-item> </td>
+                                      <td><md-list-item> {{ item.horas_prestamo}} </md-list-item></td>
                                     </tr>
                               
                             </table>

@@ -13,7 +13,8 @@ app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document
 							        $mdDialog.show(confirm).then(function() {
 							        	console.log("ACEPTAR");
 						          		 	$http.get('http://localhost/sistema/index.php?op=nuevo&id_persona='+d+'&codigo='+e).success(function(res){
-							          			console.log("Se guardó")
+							          			console.log(res);
+							          			console.log("Se guardó");
 							          		  })
 								    }, function(){
 								    	console.log("cancelado");
@@ -24,7 +25,17 @@ app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document
 							 $http.get('http://localhost/sistema/index.php?op=valid&id_persona='+idpersona+'&codigo='+codigoart)
 					    .success(function(data) {  
 					        $scope.holas = data;
-					       	if($scope.holas[1] == null || $scope.holas[0] == null){
+					        if($scope.holas[1] == null && $scope.holas[0] == null){
+					        	var confirm = $mdDialog.confirm()
+								          .title('Servicios Tecnologicos')
+								          .textContent('Ingresa tu ID y el Codigo del producto')
+								          .targetEvent(ev)
+								          .ok('ACEPTAR')
+								        $mdDialog.show(confirm).then(function(){
+									    }, function(){
+									    	console.log("cancelado");
+									    });
+					        } else if($scope.holas[1] == null || $scope.holas[0] == null){
 							  		if($scope.holas[0] == null){
 							  			var confirm = $mdDialog.confirm()
 								          .title('Servicios Tecnologicos')
@@ -95,35 +106,81 @@ app.controller('Entregar', function($scope, $http, $mdDialog, $document){
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function(data){
 			console.log($scope.codigo);
-				$scope.entregar($scope.codigo);
+			if( $scope.codigo == undefined){
+				$mdDialog.show(
+			      $mdDialog.alert()
+			        .clickOutsideToClose(true)
+			        .title('¡Error!')
+			        .textContent('Ingresar articulo')
+			        .ariaLabel('Alert Dialog')
+			        .ok('Aceptar')
+			    );
+			}else{
+				$scope.entregaexiste($scope.codigo);
+			}
 			})
+	}
+	$scope.entregaexiste = function (codigoart){
+		$http.get('http://localhost/sistema/index.php?op=articuloexists&codigo='+codigoart)
+		.success(function(data){
+			$scope.estado = data;
+			if($scope.estado[0].codigo != null){
+				$scope.entregar($scope.codigo);
+			}else {
+				$mdDialog.show(
+			      $mdDialog.alert()
+			        .clickOutsideToClose(true)
+			        .title('¡Error!')
+			        .textContent('El articulo no existe')
+			        .ariaLabel('Alert Dialog')
+			        .ok('Aceptar')
+			        .targetEvent($scope.entrega(codigoart))
+			        );
+			}
+			
+		})
 	}
 
 	$scope.entregar = function(codigoart, ev){
 		$http.get('http://localhost/sistema/index.php?op=updatevalid&codigo='+codigoart)
 			.success(function(data){
 			$scope.estado = data;
-				console.log( $scope.estado[0].Estado + "estado");
+			console.log( $scope.estado[0].Estado + "estado");
 				if($scope.estado[0].Estado == 0){
-					console.log("El articulo esta prestado, se puede hacer la entrega");
+					if($scope.estado[1].valormulta >= 6){
+						$mdDialog.show(
+			      $mdDialog.alert()
+			        .clickOutsideToClose(true)
+			        .title('¡Alerta!')
+			        .textContent('EL PRESTAMO TIENE MULTA')
+			        .ariaLabel('Alert Dialog')
+			        .ok('Aceptar')
+			        .targetEvent($scope.entrega(codigoart))
+			        );
+					}
 					$mdDialog.show(
 			      $mdDialog.alert()
-			        
 			        .clickOutsideToClose(true)
-			        .title('This is an alert title')
-			        .textContent('El articulo fue entregado satisfactoriamente')
+			        .title('Listo!')
+			        .textContent('El articulo: '+ $scope.estado[0].nombre_articulo+' fue entregado satisfactoriamente')
 			        .ariaLabel('Alert Dialog')
 			        .ok('Aceptar')
 			        .targetEvent($scope.entrega(codigoart))
 			    );
-					
 				} else {
 					console.log("El articulo no se encuentra en prestamo");
+					$mdDialog.show(
+			      $mdDialog.alert()
+			        .clickOutsideToClose(true)
+			        .title('¡Error!')
+			        .textContent('El articulo no se encuentra en prestamo')
+			        .ariaLabel('Alert Dialog')
+			        .ok('Aceptar')
+			    );
 				}
 				$scope.codigo= undefined;
 			});
 		}
-
 	$scope.entrega = function(codigoart){
 		$http({
 			method: 'POST',
@@ -134,10 +191,7 @@ app.controller('Entregar', function($scope, $http, $mdDialog, $document){
 			console.log("Codigo en entrega ******** " + codigoart);
 			})
 	}
-
 });
-
-
 
 app.controller('Lista', ['$scope', '$http', function ($scope, $http) {
     $http.get('http://localhost/sistema/?op=list')
