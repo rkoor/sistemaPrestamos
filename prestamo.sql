@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-02-2016 a las 21:25:58
+-- Tiempo de generación: 05-04-2016 a las 20:22:14
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -69,8 +69,21 @@ CREATE TABLE `prestamos` (
   `codigo` varchar(6) NOT NULL,
   `hora_prestamo` timestamp NULL DEFAULT NULL,
   `hora_entrega` timestamp NULL DEFAULT NULL,
-  `multa` int(1) NOT NULL
+  `multa` int(1) NOT NULL,
+  `horas_prestamo` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `prestamos`
+--
+
+INSERT INTO `prestamos` (`num_prestamo`, `id_persona`, `codigo`, `hora_prestamo`, `hora_entrega`, `multa`, `horas_prestamo`) VALUES
+(36, '00154459', 'ADP01', '2016-04-04 21:55:00', '2016-04-05 00:18:00', 0, 0),
+(37, '00154459', 'ADP01', '2016-04-04 22:22:34', '2016-04-05 22:32:07', 0, 24),
+(38, '00154459', 'ADP01', '2016-04-05 22:42:38', '2016-04-05 22:42:42', 0, 0),
+(39, '00111111', 'ADP01', '2016-04-05 22:48:16', '2016-04-05 22:59:48', 0, 0),
+(40, '00154459', 'ADP01', '2016-04-05 16:24:44', '2016-04-05 16:24:51', 0, 0),
+(41, '00154459', 'ADP01', '2016-04-05 16:25:46', '2016-04-06 02:26:01', 1, 10);
 
 --
 -- Índices para tablas volcadas
@@ -90,7 +103,7 @@ ALTER TABLE `prestamos`
 -- AUTO_INCREMENT de la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  MODIFY `num_prestamo` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `num_prestamo` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
