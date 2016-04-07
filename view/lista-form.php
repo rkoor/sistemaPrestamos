@@ -17,7 +17,7 @@
     <body layout="column" style="background:#001525">
               <div color="#FFFF" layout="column">
                 
-                    <img src="http://www.anahuacoaxaca.edu.mx/images/galerias/tecnologias/logo-servtec-blanco.png" style="margin: 0 auto;">
+                    <img class="imagen" src="http://www.anahuacoaxaca.edu.mx/images/galerias/tecnologias/logo-servtec-blanco.png" style="margin: 0 auto;">
                     <md-button class="md-fab md-mini md-primary" aria-label="Use Android" href="index.php">
                       <md-tooltip md-direction="right">
                         PRESTAMO Y ENTREGA

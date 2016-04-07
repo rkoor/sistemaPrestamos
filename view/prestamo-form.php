@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="Prestamo">
+<html ng-app="Prestamo" style="background:#001525">
     <head>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="view/style.css">
@@ -31,8 +31,8 @@
           <md-content class="md-padding" layout="row" layout-wrap layout-align="center start" style="background:#001525">
           <div flex="50" layout="column">
             <p>&nbsp;</p>
-                <img src="http://www.anahuacoaxaca.edu.mx/images/galerias/tecnologias/logo-servtec-blanco.png" style="margin: 0 auto;">
-            <p>&nbsp;</p>
+                <img class="imagen" src="http://www.anahuacoaxaca.edu.mx/images/galerias/tecnologias/logo-servtec-blanco.png" style="margin: 0 auto;">
+            
           <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="PRESTAMO">
               <div ng-controller="Prestar" layout="column" ng-cloak >
@@ -80,8 +80,45 @@
                   </md-content>
                   </div>
                 </md-tab>
-                </md-tab>
+                
+                  <md-tab label="CONSULTA ID">
+                    <div ng-controller="Consulta" layout="column" ng-cloak >
+                      <md-content class="md-padding">
+                        <div layout="column">
+                              <form method="POST" action="">
+                                  <div layout="column">
+                                        <md-input-container class="md-block">
+                                          <label>Nombre</label>
+                                          <input  required ng-model="nombre">
+                                        </md-input-container>
+                                          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                                              <md-button class="md-primary md-raised" ng-click="consultar()">Consultar</md-button>
+                                          </section>
+
+                                          <table align="center">
+                                            <tr>
+                                              <th>Nombre</th>
+                                              <th>ID</th>
+                                            </tr>
+                                          
+                                            <tr ng-repeat="persona in personas.personas">
+                                              <td><md-list-item >{{ persona.nombre}}</md-list-item> </td>
+                                              <td><md-list-item >{{ persona.id}}</md-list-item></td>
+                                            </tr>
+                              
+                                           </table>
+                                  </div>
+                              </form>
+                          </div>
+                      </md-content>
+                    </div>
+                  </md-tab>
+
             </md-tabs>
+            <script type="text/javascript">
+            // Popup window code
+            </script>
+              <p1><<md-button  class="md-primary md-raised" ng-click="newPopup('http://172.23.14.31/biblioteca/form.php');">Registrar persona</md-button ></p1>
             </div>
           </md-content>
         </div>  
@@ -92,7 +129,3 @@
         </md-button> 
     </body>
 </html>
-
-
-
-

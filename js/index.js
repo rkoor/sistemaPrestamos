@@ -2,7 +2,11 @@ var app =  angular.module('Prestamo', ['ngMaterial']);
 
 app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document) {
 
-
+	$scope.newPopup = function(url) {
+              popupWindow = window.open(
+                url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+            }
+            
 	$scope.save= function(a,b,d,e){
 						     		var confirm = $mdDialog.confirm()
 							          .title('Servicios Tecnologicos')
@@ -12,7 +16,7 @@ app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document
 							          .cancel('Cancelar');
 							        $mdDialog.show(confirm).then(function() {
 							        	console.log("ACEPTAR");
-						          		 	$http.get('http://localhost/sistema/index.php?op=nuevo&id_persona='+d+'&codigo='+e).success(function(res){
+						          		 	$http.get('index.php?op=nuevo&id_persona='+d+'&codigo='+e).success(function(res){
 							          			console.log(res);
 							          			console.log("Se guardó");
 							          		  })
@@ -22,7 +26,7 @@ app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document
 	}
 
 	$scope.fprestar = function(idpersona,codigoart, ev){
-							 $http.get('http://localhost/sistema/index.php?op=valid&id_persona='+idpersona+'&codigo='+codigoart)
+							 $http.get('index.php?op=valid&id_persona='+idpersona+'&codigo='+codigoart)
 					    .success(function(data) {  
 					        $scope.holas = data;
 					        if($scope.holas[1] == null && $scope.holas[0] == null){
@@ -45,7 +49,7 @@ app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document
 								          .cancel('Cancelar');
 								        $mdDialog.show(confirm).then(function() {
 							          		 	$mdDialog.show({
-												        templateUrl: 'view/dialog.tmpl.html',
+												        templateUrl: '172.23.14.31/biblioteca/form.php',
 												        parent: angular.element(document.body),
 												        
 												        clickOutsideToClose:true
@@ -99,13 +103,6 @@ app.controller('Prestar', function($scope, $http, $mdDialog, $mdToast, $document
 app.controller('Entregar', function($scope, $http, $mdDialog, $document){
 	
 	$scope.pentregar = function (){
-		$http({
-			method: 'POST',
-      url: 'index.php?op=valid',
-      data: $.param({'codigo':$scope.codigo}),
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).success(function(data){
-			console.log($scope.codigo);
 			if( $scope.codigo == undefined){
 				$mdDialog.show(
 			      $mdDialog.alert()
@@ -115,17 +112,18 @@ app.controller('Entregar', function($scope, $http, $mdDialog, $document){
 			        .ariaLabel('Alert Dialog')
 			        .ok('Aceptar')
 			    );
-			}else{
+			}else{ 
 				$scope.entregaexiste($scope.codigo);
 			}
-			})
+			
 	}
 	$scope.entregaexiste = function (codigoart){
-		$http.get('http://localhost/sistema/index.php?op=articuloexists&codigo='+codigoart)
+		console.log(codigoart);
+		$http.get('index.php?op=articuloexists&codigo='+codigoart)
 		.success(function(data){
 			$scope.estado = data;
-			if($scope.estado[0].codigo != null){
-				$scope.entregar($scope.codigo);
+			if($scope.estado.codigo != null){
+				$scope.entregar(codigoart);
 			}else {
 				$mdDialog.show(
 			      $mdDialog.alert()
@@ -142,10 +140,11 @@ app.controller('Entregar', function($scope, $http, $mdDialog, $document){
 	}
 
 	$scope.entregar = function(codigoart, ev){
-		$http.get('http://localhost/sistema/index.php?op=updatevalid&codigo='+codigoart)
+		$http.get('index.php?op=updatevalid&codigo='+codigoart)
 			.success(function(data){
 			$scope.estado = data;
-			console.log( $scope.estado[0].Estado + "estado");
+			console.log( $scope.estado[0].Estado + " estado");
+			console.log($scope.estado[1].valormulta + " multa");
 				if($scope.estado[0].Estado == 0){
 					if($scope.estado[1].valormulta >= 6){
 						$mdDialog.show(
@@ -170,37 +169,45 @@ app.controller('Entregar', function($scope, $http, $mdDialog, $document){
 				} else {
 					console.log("El articulo no se encuentra en prestamo");
 					$mdDialog.show(
-			      $mdDialog.alert()
-			        .clickOutsideToClose(true)
-			        .title('¡Error!')
-			        .textContent('El articulo no se encuentra en prestamo')
-			        .ariaLabel('Alert Dialog')
-			        .ok('Aceptar')
+				      $mdDialog.alert()
+				        .clickOutsideToClose(true)
+				        .title('¡Error!')
+				        .textContent('El articulo no se encuentra en prestamo')
+				        .ariaLabel('Alert Dialog')
+				        .ok('Aceptar')
 			    );
 				}
 				$scope.codigo= undefined;
 			});
 		}
 	$scope.entrega = function(codigoart){
-		$http({
-			method: 'POST',
-      url: 'index.php?op=update',
-      data: $.param({'codigo':codigoart}),
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).success(function(data){
+		$http.get('index.php?op=update&codigo='+codigoart)
+		.success(function(data){
 			console.log("Codigo en entrega ******** " + codigoart);
 			})
 	}
 });
 
 app.controller('Lista', ['$scope', '$http', function ($scope, $http) {
-    $http.get('http://localhost/sistema/?op=list')
+    $http.get('index.php?op=list')
     .success(function(data) {    
         $scope.items = data;
+        console.log($scope.items);
     });
     $scope.change=function(multa_hora){
-    	$http.get('http://localhost/sistema/index.php?op=updatemulta&multa_hora='+multa_hora).success(function(res){
+    	$http.get('index.php?op=updatemulta&multa_hora='+multa_hora).success(function(res){
 			console.log(multa_hora);
 			})
     };
 }]);
+
+app.controller('Consulta', function ($scope, $http, $mdDialog, $document){
+	$scope.consultar = function (){
+		$http.get('index.php?op=cons&nombre='+$scope.nombre).success(function(data){
+			$scope.personas = data;
+						
+		});
+			
+		
+	}
+});

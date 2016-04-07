@@ -29,6 +29,8 @@ class PrestamosController {
                 $this->updateValid();
             } elseif ( $op == 'updatemulta' ) {
                 $this->updateMulta();
+            } elseif ( $op == 'cons' ) {
+                $this->consultaPersona();
             } elseif ( $op == 'lista' ) {
                 $this->lista();
             } elseif ( $op == 'articuloexists' ){
@@ -43,6 +45,12 @@ class PrestamosController {
         }
     }
     
+    public function consultaPersona(){
+        $title='Servicios Tecnológicos';
+        $nombre = $_GET['nombre'];
+        echo $this->prestamosService->consultaPersona($nombre);
+    }
+
     public function updateExiste(){
         $title='Servicios Tecnológicos';
         $codigo = $_GET['codigo'];
@@ -106,7 +114,7 @@ class PrestamosController {
         $id_persona     = $_GET['id_persona'];
         $codigo           = $_GET['codigo'];
         echo $this->prestamosService->validarPrestamo($id_persona, $codigo);
-      //  include 'view/bal.php';
+
     }
 
     public function lista() {
@@ -120,7 +128,7 @@ class PrestamosController {
         $errors = array();
 
         
-            $codigo           = isset($_POST['codigo'])?   $_POST['codigo'] :NULL;          
+            $codigo           = isset($_GET['codigo'])?   $_GET['codigo'] :NULL; 
             try {
                 echo $this->prestamosService->updatePrestamo($codigo);
                 //$this->redirect('index.php');

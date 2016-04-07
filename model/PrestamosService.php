@@ -62,6 +62,17 @@ class PrestamosService {
         $this->prestamosGateway = new PrestamosGateway();
     }
     
+    public function consultaPersona($nombre){
+        try {
+            $this->openDb();
+            $res = $this->prestamosGateway->consultaPersona($nombre);
+            $this->closeDb();
+            return $res;
+        } catch (Exception $e) {
+            $this->closeDb();
+            throw $e;
+        }
+    }
     public function getAllPrestamos($order) {
         try {
             $this->openDb();
